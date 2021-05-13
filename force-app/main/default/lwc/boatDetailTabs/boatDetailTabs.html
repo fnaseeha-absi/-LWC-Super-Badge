@@ -1,0 +1,39 @@
+<template>
+    <template if:false={wiredRecord.data}>
+      <!-- lightning card for the label when wiredRecord has no data goes here  -->
+      <lightning-card>
+         <span class="no-boat-height slds-align_absolute-center">{label.labelPleaseSelectABoat}</span>
+      </lightning-card>
+    </template>
+    <template if:true={wiredRecord.data}>
+       <!-- lightning card for the content when wiredRecord has data goes here  -->
+       <lightning-tabset variant="scoped">
+           <lightning-tab label={label.labelDetails}>
+              <lightning-card  variant="Narrow"  title={boatName} icon-name={detailsTabIconName}>
+                    <lightning-button label={label.labelFullDetails} slot="actions"  onclick={navigateToRecordViewPage}></lightning-button>
+                        <lightning-record-view-form
+                            record-id={boatId}
+                            object-api-name="Boat__c">
+                            <template if:true={showFields}>
+                                <lightning-output-field field-name="BoatType__c"></lightning-output-field>
+                                <lightning-output-field field-name="Length__c"></lightning-output-field>
+                                <lightning-output-field field-name="Price__c"></lightning-output-field>
+                                <lightning-output-field field-name="Description__c"></lightning-output-field>
+                            </template>
+                        </lightning-record-view-form>
+              </lightning-card>
+           </lightning-tab>
+           <lightning-tab label={label.labelReviews}>
+               Two Content !
+           </lightning-tab>
+           <lightning-tab label={label.labelAddReview} >
+               <lightning-card  variant="Narrow"  title="Hello" icon-name="standard:account">
+                   <lightning-button-icon  icon-name="utility:down" variant="border-filled" alternative-text="Show More" slot="actions"></lightning-button-icon>
+                   <p class="slds-p-horizontal_small">Card Body Narrow (custom component)</p>
+                   <p slot="footer">Card Footer</p>
+               </lightning-card>
+           </lightning-tab>
+       </lightning-tabset>
+    </template>
+  </template>
+  

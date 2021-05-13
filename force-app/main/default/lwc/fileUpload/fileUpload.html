@@ -1,0 +1,42 @@
+<template>
+    <lightning-card icon-name="custom:custom19" title='Read CSV File'>
+        <div style="margin-left: 3%">
+            <lightning-file-upload accept={acceptedFormats} 
+                                   label="Upload File" 
+                                   multiple="multiple" 
+                                   onuploadfinished={handleUploadFinished} 
+                                   record-id={recordId}></lightning-file-upload>
+        </div>
+
+
+        <div if:true={error}>
+            {error}
+        </div><br/>
+
+        <div if:true={data}>
+           
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col">No</th>
+                        <th scope="col"> Account Name </th>
+                        <th scope="col"> Account LookupId </th>
+                        <th scope="col"> Date </th>
+                    </tr>
+                </thead>
+                <tbody>
+                <template if:true={data} for:each={data} for:item="poc" for:index="index">
+                    <tr class="slds-hint-parent" key={poc.lookupId}>
+                        <th scope="row">{index}</th>
+                        <th scope="row">{poc.accName} </th>
+                        <th scope="row">{poc.lookupId} </th>
+                        <th scope="row">{poc.pocDate}</th>
+                    </tr>
+                </template>
+                </tbody>
+                
+            </table>
+        </div>
+
+    </lightning-card>
+</template>
